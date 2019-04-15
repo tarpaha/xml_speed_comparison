@@ -1,3 +1,5 @@
 /xml_builder/bin
 /xml_builder/obj
+/xml_builder/.idea
+/xml_builder/resource_map.xml
 /xml_reader/target

@@ -6,3 +6,10 @@ edition = "2018"
 
 [dependencies]
 quick-xml = "0.12.0"
+
+[dev-dependencies]
+criterion = "0.2"
+
+[[bench]]
+name = "bench_iteration"
+harness = false

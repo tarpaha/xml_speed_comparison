@@ -7,6 +7,9 @@ impl Asset {
     pub fn new(path: String) -> Asset {
         Asset { path }
     }
+    pub fn get_path(&self) -> &String {
+        return &self.path;
+    }
 }
 
 #[derive(Debug)]
@@ -22,6 +25,18 @@ impl Bundle {
     }
     pub fn add_asset(&mut self, asset: Asset) {
         self.assets.push(asset);
+    }
+    pub fn get_filename(&self) -> &String {
+        return &self.name;
+    }
+    pub fn get_download_size(&self) -> u32 {
+        return self.size;
+    }
+    pub fn get_assets_count(&self) -> usize {
+        return self.assets.len();
+    }
+    pub fn get_asset(&self, index: usize) -> &Asset {
+        return &self.assets[index];
     }
 }
 
@@ -39,6 +54,9 @@ impl ResourceMap {
     }
     pub fn get_bundles_count(&self) -> usize {
         return self.bundles.len();
+    }
+    pub fn get_bundle(&self, index: usize) -> &Bundle {
+        return &self.bundles[index];
     }
 }
 

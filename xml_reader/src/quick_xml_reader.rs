@@ -7,26 +7,10 @@ use std::str;
 
 use super::types;
 
-#[allow(dead_code)]
 pub fn read_from_file(filename: &str) -> types::ResourceMap {
     let file = File::open(filename).unwrap();
     let file = BufReader::new(file);
     return read(file);
-}
-
-#[allow(dead_code)]
-pub fn read_from_test_string() -> types::ResourceMap {
-    let xml = r#"
-<?xml version="1.0" encoding="utf-8"?>
-<ResourceMapData>
-  <Bundles>
-    <Bundle Filename="bundle01" DownloadSize="42">
-      <Asset AssetPath="asset01" />
-    </Bundle>
-  </Bundles>
-</ResourceMapData>
-"#;
-    return read(xml.as_bytes());
 }
 
 fn read<R: BufRead>(data: R) -> types::ResourceMap {
@@ -112,4 +96,31 @@ fn cow_chars_to_u32(chars: &Cow<[u8]>) -> u32 {
 
 fn cow_chars_to_string(chars: &Cow<[u8]>) -> String {
     return str::from_utf8(chars).unwrap().to_string()
-} 
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_reading() {
+        let xml = r#"
+        <?xml version="1.0" encoding="utf-8"?>
+        <ResourceMapData>
+          <Bundles>
+            <Bundle Filename="bundle01" DownloadSize="42">
+              <Asset AssetPath="asset01" />
+            </Bundle>
+          </Bundles>
+        </ResourceMapData>
+        "#;
+        let resource_map = read(xml.as_bytes());
+        assert_eq!(resource_map.get_bundles_count(), 1);
+        let bundle = resource_map.get_bundle(0);
+        assert_eq!(bundle.get_filename(), "bundle01");
+        assert_eq!(bundle.get_download_size(), 42);
+        assert_eq!(bundle.get_assets_count(), 1);
+        let asset = bundle.get_asset(0);
+        assert_eq!(asset.get_path(), "asset01");
+    }
+}

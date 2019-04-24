@@ -3,10 +3,16 @@ extern crate xml;
 use std::io::BufRead;
 use xml::reader::{EventReader, XmlEvent};
 
+use super::xml_reader::XmlReader;
 use super::types;
 
-pub fn read<R: BufRead>(data: R) -> types::ResourceMap {
-    return read_resource_map(data).unwrap();
+pub struct XmlReaderXmlRs {
+}
+
+impl XmlReader for XmlReaderXmlRs {
+    fn read<R: BufRead>(data: R) -> types::ResourceMap {
+        return read_resource_map(data).unwrap();
+    }
 }
 
 fn read_resource_map<R: BufRead>(data: R) -> Result<types::ResourceMap, String> {

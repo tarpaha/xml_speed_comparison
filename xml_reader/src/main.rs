@@ -2,12 +2,12 @@ use std::fs;
 use std::time::Instant;
 
 mod xml_reader;
-mod quick_xml_reader;
+mod xml_reader_quick_xml;
 mod xml_rs_reader;
 mod types;
 
 use xml_reader::XmlReader;
-use quick_xml_reader::XmlReaderQuickXml;
+use xml_reader_quick_xml::XmlReaderQuickXml;
 
 
 fn main() {

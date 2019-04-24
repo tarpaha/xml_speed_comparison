@@ -1,19 +1,12 @@
 use quick_xml::Reader;
 use quick_xml::events::{Event, BytesStart};
-use std::io::{BufRead, BufReader};
+use std::io::BufRead;
 use std::borrow::Cow;
-use std::fs::File;
 use std::str;
 
 use super::types;
 
-pub fn read_from_file(filename: &str) -> types::ResourceMap {
-    let file = File::open(filename).unwrap();
-    let file = BufReader::new(file);
-    return read(file);
-}
-
-fn read<R: BufRead>(data: R) -> types::ResourceMap {
+pub fn read<R: BufRead>(data: R) -> types::ResourceMap {
     let mut resource_map = types::ResourceMap::new();
     let mut current_bundle: Option<types::Bundle> = None;
     let mut reader = Reader::from_reader(data);

@@ -70,3 +70,30 @@ fn read_resource_map<R: BufRead>(data: R) -> Result<types::ResourceMap, String> 
     }
     Ok(resource_map)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_reading() {
+        let xml = r#"
+        <?xml version="1.0" encoding="utf-8"?>
+        <ResourceMapData>
+          <Bundles>
+            <Bundle Filename="bundle01" DownloadSize="42">
+              <Asset AssetPath="asset01" />
+            </Bundle>
+          </Bundles>
+        </ResourceMapData>
+        "#;
+        let resource_map = read_resource_map(xml.as_bytes()).unwrap();
+        assert_eq!(resource_map.get_bundles_count(), 1);
+        let bundle = resource_map.get_bundle(0);
+        assert_eq!(bundle.get_filename(), "bundle01");
+        assert_eq!(bundle.get_download_size(), 42);
+        assert_eq!(bundle.get_assets_count(), 1);
+        let asset = bundle.get_asset(0);
+        assert_eq!(asset.get_path(), "asset01");
+    }
+}

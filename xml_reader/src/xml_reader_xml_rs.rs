@@ -1,5 +1,3 @@
-extern crate xml;
-
 use std::io::BufRead;
 use xml::reader::{EventReader, XmlEvent};
 

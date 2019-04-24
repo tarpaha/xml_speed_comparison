@@ -3,16 +3,16 @@ use std::time::Instant;
 
 mod xml_reader;
 mod xml_reader_quick_xml;
-mod xml_rs_reader;
+mod xml_reader_xml_rs;
 mod types;
 
 use xml_reader::XmlReader;
 use xml_reader_quick_xml::XmlReaderQuickXml;
-
+use xml_reader_xml_rs::XmlReaderXmlRs;
 
 fn main() {
     profile_xml_reader::<XmlReaderQuickXml>("quick_xml");
-    //profile_xml_rs();
+    profile_xml_reader::<XmlReaderXmlRs>   ("xml_rs   ");
 }
 
 fn profile_xml_reader<Reader: XmlReader>(reader_name: &str) {

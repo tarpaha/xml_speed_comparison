@@ -4,7 +4,7 @@ use std::io::BufRead;
 use std::borrow::Cow;
 use std::str;
 
-use super::xml_reader::XmlReader;
+use super::XmlReader;
 use super::types;
 
 pub struct XmlReaderQuickXml {

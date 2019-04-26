@@ -1,7 +1,7 @@
 use std::io::BufRead;
 use xml::reader::{EventReader, XmlEvent};
 
-use super::xml_reader::XmlReader;
+use super::XmlReader;
 use super::types;
 
 pub struct XmlReaderXmlRs {

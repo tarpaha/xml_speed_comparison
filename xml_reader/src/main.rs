@@ -6,10 +6,12 @@ mod types;
 
 use xml_parser::XmlParser;
 use xml_parser::quick_xml::XmlParserQuickXml;
+use xml_parser::minidom::XmlParserMinidom;
 use xml_parser::xml_rs::XmlParserXmlRs;
 
 fn main() {
     profile_xml_parser::<XmlParserQuickXml>("quick_xml");
+    profile_xml_parser::<XmlParserMinidom> ("minidom  ");
     profile_xml_parser::<XmlParserXmlRs>   ("xml_rs   ");
 }
 

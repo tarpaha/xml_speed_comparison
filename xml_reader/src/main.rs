@@ -16,7 +16,7 @@ fn main() {
 fn profile_xml_parser<Parser: XmlParser>(parser_name: &str) {
     let data = get_xml_data();
     let now = Instant::now();
-    let resource_map = Parser::parse(data.as_bytes());
+    let resource_map = Parser::parse(&data);
     let elapsed = now.elapsed();
     let sec = (elapsed.as_secs() as f64) + (elapsed.subsec_nanos() as f64 / 1000_000_000.0);
     println!("{} => bundles count: {}, seconds: {}", parser_name, resource_map.get_bundles_count(), sec);

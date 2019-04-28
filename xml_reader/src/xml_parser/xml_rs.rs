@@ -1,4 +1,3 @@
-use std::io::BufRead;
 use xml::reader::{EventReader, XmlEvent};
 
 use super::XmlParser;
@@ -7,15 +6,15 @@ use super::types;
 pub struct XmlParserXmlRs;
 
 impl XmlParser for XmlParserXmlRs {
-    fn parse<R: BufRead>(data: R) -> types::ResourceMap {
+    fn parse(data: &String) -> types::ResourceMap {
         return parse_to_resource_map(data).unwrap();
     }
 }
 
-fn parse_to_resource_map<R: BufRead>(data: R) -> Result<types::ResourceMap, String> {
+fn parse_to_resource_map(data: &String) -> Result<types::ResourceMap, String> {
     let mut resource_map = types::ResourceMap::new();
     let mut current_bundle: Option<types::Bundle> = None;
-    let parser = EventReader::new(data);
+    let parser = EventReader::new(data.as_bytes());
     for event in parser {
         match event {
             Ok(XmlEvent::StartElement { name, attributes, .. }) => {

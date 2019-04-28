@@ -1,6 +1,5 @@
 use quick_xml::Reader;
 use quick_xml::events::{Event, BytesStart};
-use std::io::BufRead;
 use std::borrow::Cow;
 use std::str;
 
@@ -10,10 +9,10 @@ use super::types;
 pub struct XmlParserQuickXml;
 
 impl XmlParser for XmlParserQuickXml {
-    fn parse<R: BufRead>(data: R) -> types::ResourceMap {
+    fn parse(data: &String) -> types::ResourceMap {
         let mut resource_map = types::ResourceMap::new();
         let mut current_bundle: Option<types::Bundle> = None;
-        let mut reader = Reader::from_reader(data);
+        let mut reader = Reader::from_str(data.as_str());
         let mut buf = Vec::new();
         loop {
             match reader.read_event(&mut buf) {

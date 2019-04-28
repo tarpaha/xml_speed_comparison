@@ -4,8 +4,7 @@ use xml::reader::{EventReader, XmlEvent};
 use super::XmlReader;
 use super::types;
 
-pub struct XmlReaderXmlRs {
-}
+pub struct XmlReaderXmlRs;
 
 impl XmlReader for XmlReaderXmlRs {
     fn read<R: BufRead>(data: R) -> types::ResourceMap {

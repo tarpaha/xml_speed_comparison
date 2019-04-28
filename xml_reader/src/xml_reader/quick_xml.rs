@@ -7,8 +7,7 @@ use std::str;
 use super::XmlReader;
 use super::types;
 
-pub struct XmlReaderQuickXml {
-}
+pub struct XmlReaderQuickXml;
 
 impl XmlReader for XmlReaderQuickXml {
     fn read<R: BufRead>(data: R) -> types::ResourceMap {

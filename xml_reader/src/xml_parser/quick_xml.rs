@@ -4,13 +4,13 @@ use std::io::BufRead;
 use std::borrow::Cow;
 use std::str;
 
-use super::XmlReader;
+use super::XmlParser;
 use super::types;
 
-pub struct XmlReaderQuickXml;
+pub struct XmlParserQuickXml;
 
-impl XmlReader for XmlReaderQuickXml {
-    fn read<R: BufRead>(data: R) -> types::ResourceMap {
+impl XmlParser for XmlParserQuickXml {
+    fn parse<R: BufRead>(data: R) -> types::ResourceMap {
         let mut resource_map = types::ResourceMap::new();
         let mut current_bundle: Option<types::Bundle> = None;
         let mut reader = Reader::from_reader(data);
@@ -112,7 +112,7 @@ mod tests {
           </Bundles>
         </ResourceMapData>
         "#;
-        let resource_map = XmlReaderQuickXml::read(xml.as_bytes());
+        let resource_map = XmlParserQuickXml::read(xml.as_bytes());
         assert_eq!(resource_map.get_bundles_count(), 1);
         let bundle = resource_map.get_bundle(0);
         assert_eq!(bundle.get_filename(), "bundle01");

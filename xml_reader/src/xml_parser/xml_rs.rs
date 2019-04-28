@@ -85,7 +85,7 @@ mod tests {
           </Bundles>
         </ResourceMapData>
         "#;
-        let resource_map = parse_to_resource_map(xml.as_bytes()).unwrap();
+        let resource_map = parse_to_resource_map(&xml.to_string()).unwrap();
         assert_eq!(resource_map.get_bundles_count(), 1);
         let bundle = resource_map.get_bundle(0);
         assert_eq!(bundle.get_filename(), "bundle01");

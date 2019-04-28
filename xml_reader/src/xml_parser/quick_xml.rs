@@ -111,7 +111,7 @@ mod tests {
           </Bundles>
         </ResourceMapData>
         "#;
-        let resource_map = XmlParserQuickXml::read(xml.as_bytes());
+        let resource_map = XmlParserQuickXml::parse(&xml.to_string());
         assert_eq!(resource_map.get_bundles_count(), 1);
         let bundle = resource_map.get_bundle(0);
         assert_eq!(bundle.get_filename(), "bundle01");

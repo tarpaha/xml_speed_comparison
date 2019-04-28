@@ -106,7 +106,9 @@ mod tests {
         <ResourceMapData>
           <Bundles>
             <Bundle Filename="bundle01" DownloadSize="42">
-              <Asset AssetPath="asset01" />
+              <Assets>
+                <Asset AssetPath="asset01" />
+              </Assets>
             </Bundle>
           </Bundles>
         </ResourceMapData>
